@@ -11,6 +11,7 @@ namespace Catalog.API.Data
             bool existingProduct = productCollection.Find(p => true).Any();
             if (!existingProduct)
             {
+                //InsertMany() expects an IEnumerable; of Products in our case, you can hover to see
                 productCollection.InsertMany(GetPreConfiguredProducts());
             }
         }

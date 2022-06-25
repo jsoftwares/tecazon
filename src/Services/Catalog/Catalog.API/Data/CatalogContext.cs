@@ -11,6 +11,9 @@ namespace Catalog.API.Data
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName")); //create DB if it doesn't find one with the name
 
             Products = database.GetCollection<Product>(configuration.GetValue<string>("DatabaseSettings:CollectionName"));
+
+            //Seed data into DB
+            CatalogContextSeed.SeedData(Products);
         }
         public IMongoCollection<Product> Products {get;}
     }
