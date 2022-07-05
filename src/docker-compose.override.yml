@@ -5,7 +5,7 @@ services:
     container_name: catalogdb
     restart: always
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - mongo_data:/data/db
 
@@ -13,13 +13,13 @@ services:
     container_name: basketdb
     restart: always
     ports:
-      - 6379:6379
+      - "6379:6379"
 
   discountdb:
     container_name: discountdb
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postresql/data/
 
@@ -30,7 +30,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=T3caz0n@2022
     restart: always
     ports:
-      - 5050:80
+      - "5050:80"
     volumes:
       - pgadmin_data:/root/.pgadmin
 
@@ -38,14 +38,14 @@ services:
     container_name: portainer
     restart: always
     ports:
-      - 8080:8000   #8080 bcos we're already using 8000 for catalog.api service
-      - 9000:9000
+      - "8080:8000" #8080 bcos we're already using 8000 for catalog.api service
+      - "9000:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
 
   catalog.api:
-    container_name: catalop.api
+    container_name: catalog.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=mongodb://catalogdb:27017"
@@ -63,4 +63,3 @@ services:
       - basketdb
     ports:
       - "8001:80"
-
