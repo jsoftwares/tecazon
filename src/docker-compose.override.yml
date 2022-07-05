@@ -15,6 +15,25 @@ services:
     ports:
       - 6379:6379
 
+  discountdb:
+    container_name: discountdb
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postresql/data/
+
+  pgadmin:
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=support@tecazon.com
+      - PGADMIN_DEFAULT_PASSWORD=T3caz0n@2022
+    restart: always
+    ports:
+      - 5050:80
+    volumes:
+      - pgadmin_data:/root/.pgadmin
+
   portainer:
     container_name: portainer
     restart: always
