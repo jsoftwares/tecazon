@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option csharp_namespace = "Discount.gRPC.Protos";
+
+/**Remember to set this protobuf file properties by clicking on it and press F4 or right click & select Properties, 
+* then set 'Build Action' = Protobuf compiler; in other to compile from VS, 'gRPC Stub CLasses' = server only; bcos we 
+would be creating a gRPC server for exposing discount services **/
+
+//Expose a service called Discount
+service DiscountProtoService {
+	rpc GetDiscount (GetDiscountRequest) returns (CouponModel);
+
+	rpc CreateDiscount (CreateDiscountRequest) returns (CouponModel);
+	rpc UpdateDiscount (UpdateDiscountRequest) returns (CouponModel);
+	rpc DeleteDiscount (DeleteDiscountRequest) returns (DeleteDiscountResponse);
+}
+
+//We define d complex type here; put d member of the class. =1 means this gRPC definitions needs an order, so we have to
+//give every member a number.
+message GetDiscountRequest {
+	string productName = 1;
+}
+
+message CouponModel {
+	int32 id = 1;
+	string productName = 2;
+	string description = 3;
+	int32 amount = 4;
+}
+
+message CreateDiscountRequest {
+	CouponModel coupon = 1;
+}
+
+message UpdateDiscountRequest {
+	CouponModel coupon = 1;
+}
+
+message DeleteDiscountRequest {
+	string productName = 1;
+}
+
+message DeleteDiscountResponse {
+	bool success = 1;
+}
