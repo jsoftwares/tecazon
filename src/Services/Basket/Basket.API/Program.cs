@@ -1,4 +1,6 @@
+using Basket.API.gRPCServices;
 using Basket.API.Repositories;
+using Discount.gRPC.Protos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,13 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+/**We register d DiscountGrpcService we injected in BasketController & also registered the DiscountProtoService
+ * bcos if you right click DiscountGrpcService & click "Go to Definition, you will see it uses DiscountProtoServiceClient
+ * which is generated from VS for consuming the gRPC service as a client. For gRPC client registration, we need to 
+ * know the URL of d Discount gRPC server**/
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
+    (o => o.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]));
+builder.Services.AddScoped<DiscountGrpcService>();
 
 var app = builder.Build();
 
