@@ -28,7 +28,6 @@ namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
             var orderToUpdate = await _orderRepository.GetByIdAsync(request.Id);
             if (orderToUpdate == null)
             {
-                _logger.LogError("Order was not found in database.");
                 throw new NotFoundException(nameof(Order), request.Id);
             }
 
