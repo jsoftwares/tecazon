@@ -1,4 +1,5 @@
-﻿namespace Ordering.Application.Exceptions
+﻿using System;
+namespace Ordering.Application.Exceptions
 {
     public class NotFoundException : ApplicationException
     {
