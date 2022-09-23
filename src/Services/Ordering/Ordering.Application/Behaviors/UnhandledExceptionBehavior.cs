@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Ordering.Application.Behaviours
+namespace Ordering.Application.Behaviors
 {
     //If there is any unhandled exception, we use this class/Behavior to catch the exception into the Behaviour layer. This wasy we 
     //keep our Handler classes clean by not adding try-catch; we just centralize them here.
     //So this Behavior performs logging where there is any unhandled exception in our handler classes Handle methods
-    public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : MediatR.IRequest<TResponse>
+    public class UnhandledExceptionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : MediatR.IRequest<TResponse>
     {
         private readonly ILogger<TRequest> _logger;
 
-        public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
+        public UnhandledExceptionBehavior(ILogger<TRequest> logger)
         {
             _logger = logger;
         }
