@@ -6,7 +6,7 @@ namespace Ordering.Infrastructure.Persistence
 {
     //In this layer(Infrastruction) we are going to perform DB & email send operations with external systems; this will include d
     //implementation for the absraction in the Application(/Contracts) layer.
-    internal class OrderContext : DbContext
+    public class OrderContext : DbContext
     {
         //we have no specific options here, but it is required for d Entity Frameworkcore to inherit from d base constructor
         public OrderContext(DbContextOptions<OrderContext> options) : base(options)
