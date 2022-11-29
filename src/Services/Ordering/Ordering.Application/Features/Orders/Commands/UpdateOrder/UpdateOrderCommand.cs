@@ -2,7 +2,7 @@
 
 namespace Ordering.Application.Features.Orders.Commands.UpdateOrder
 {
-    //We are not returning anything here hence we didnt pass any argument to IRequest
+    //We are not returning anything here hence we didnt pass any type to IRequest
     public class UpdateOrderCommand : IRequest
     {
         public int Id { get; set; }

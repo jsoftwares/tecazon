@@ -15,7 +15,7 @@ namespace Ordering.API.Controllers
         /**For all operations here we need the Mediator object inserted into the ASP.Netcore dependency injection.
          * You can use a package installed in a referenced project without having to install it again in the referencing project
          * eg we had installed MediaR package in Ordering Application and and we used it here without installing again. You may just
-         * need to build the referenced project to have it reflect here. **/
+         * need to build the this project to have the nugget package reflect here. **/
 
         private readonly IMediator _mediator;
 

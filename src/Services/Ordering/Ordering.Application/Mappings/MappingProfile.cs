@@ -6,7 +6,8 @@ using Ordering.Domain.Entities;
 
 namespace Ordering.Application.Mappings
 {
-    // Mediator hleps us send command & query object to the correct Command/Query handler in clean architecture (Mediator design pattern) 
+    //We are using Mapper so we can map Domain objects to Application objects
+    // Mediator helps us send command & query object to the correct Command/Query handler in clean architecture (Mediator design pattern) 
     public class MappingProfile : Profile 
     {
         public MappingProfile()

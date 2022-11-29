@@ -9,7 +9,9 @@ namespace Ordering.Application.Features.Orders.Queries.GetOrderList
      * starts up into d ASP.Net built-in dependency injection. This is why d Application layer only focuses on business
      * requirements and not d implementations(there's no implementation details from d DB related external systems here).
      * The biz requirement here is the customer needs to be able to get orders by username so we only implement
-     * GetOrdersByUsername in our handler class**/
+     * GetOrdersByUsername in our handler class
+     * The type provided to the IRequestHandler is first the request type (GetOrderListQuery) and the expected response type 
+     * (List<OrdersVm>) from the request**/
     public class GetOrderListQueryHandler : IRequestHandler<GetOrderListQuery, List<OrdersVm>>
     {
         private readonly IOrderRepository _orderRepository;
