@@ -32,7 +32,7 @@ namespace Ordering.Infrastructure.Email
             var from = new EmailAddress
             {
                 Email = _emailSettings.FromAddress,
-                Name = _ - _emailSettings.FromName
+                Name = _emailSettings.FromName
             };
 
             var msg = MailHelper.CreateSingleEmail(from, to, subject, emailBody, emailBody);
