@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository > ();
 
 var app = builder.Build();
+
+/**Creates Discount DB and Table in POstgres and seed in any dummy data once DiscountAPI service starts**/
 app.MigrateDatabase<Program>();
 
 // Configure the HTTP request pipeline.
