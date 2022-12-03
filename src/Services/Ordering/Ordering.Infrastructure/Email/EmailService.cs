@@ -10,7 +10,7 @@ namespace Ordering.Infrastructure.Email
     public class EmailService : IEmailService
     {
         public EmailSettings _emailSettings { get; }
-        public ILogger<EmailService> _logger;
+        public ILogger<EmailService> _logger { get; }
 
         //Since we are getting EmailSettings from application setting, it should be IOption(using Microsoft.Extensions); this 
         //will help us get application settings in a structured way

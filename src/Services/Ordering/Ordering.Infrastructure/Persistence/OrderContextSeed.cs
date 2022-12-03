@@ -1,8 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Ordering.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 
 /**We will use this class to add/seed some prebuild Order data into the orders DB**/
@@ -25,7 +22,7 @@ namespace Ordering.Infrastructure.Persistence
         {
             return new List<Order>
             {
-                new Order() {UserName = "jeffonochie", FirstName = "Jeffrey", LastName = "Onochie", EmailAddress = "jeff.ict@gmail.com", AddressLine = "Lekki, Lagos", Country = "Nigeria", TotalPrice = 350 }
+                new Order() {UserName = "jeffonochie", FirstName = "Jeffrey", LastName = "Onochie", EmailAddress = "jeff.ict@gmail.com", AddressLine = "Lekki, Lagos", State = "Lagos", ZipCode = "23401", Country = "Nigeria", TotalPrice = 350, PaymentMethod = 1 }
             };
         }
     }
