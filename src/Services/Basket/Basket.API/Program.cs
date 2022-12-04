@@ -1,6 +1,7 @@
 using Basket.API.gRPCServices;
 using Basket.API.Repositories;
 using Discount.gRPC.Protos;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +12,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Redis Configuration
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetValue<string>("CacheSettings:ConnectionString");
 });
 
+//General Configuration
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+//Grpc configuration
 /**We register d DiscountGrpcService we injected in BasketController & also registered the DiscountProtoService
  * bcos if you right click DiscountGrpcService & click "Go to Definition, you will see it uses DiscountProtoServiceClient
  * which is generated from VS for consuming the gRPC service as a client. For gRPC client registration, we need to 
@@ -24,6 +29,16 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>
     (o => o.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]));
 builder.Services.AddScoped<DiscountGrpcService>();
+
+//MassTransit-RabbitMQ configuration
+builder.Services.AddMassTransit(config =>
+{
+    config.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSetting:HostAddress"]);
+    });
+});
+//builder.Services.AddMassTransitHostedService(); this is registerred by default in MassTransit v8 and does not need to be done explicitely anymore
 
 var app = builder.Build();
 
