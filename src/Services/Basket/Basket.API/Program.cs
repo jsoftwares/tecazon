@@ -20,6 +20,8 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 //General Configuration
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.AddAutoMapper(typeof(Program));
+//builder.Services.AddAutoMapper(typeof(StartupBase)); Core 5
 
 //Grpc configuration
 /**We register d DiscountGrpcService we injected in BasketController & also registered the DiscountProtoService
