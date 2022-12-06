@@ -7,8 +7,6 @@ namespace EventBus.Messages.Events
 {
     public class IntegrationBaseEvent
     {
-        public Guid Id { get; private set; }
-        public DateTime CreateDate { get; private set; }
 
         //since these properties are d private set; we provide these ctor providing these values with Id & CreateDate
         //if you don't provide parameters to d ctor it generate a new Id & use current Date/Time for parameters.
@@ -23,5 +21,8 @@ namespace EventBus.Messages.Events
             Id = id;
             CreateDate = createDate;
         }
+
+        public Guid Id { get; private set; }
+        public DateTime CreateDate { get; private set; }
     }
 }

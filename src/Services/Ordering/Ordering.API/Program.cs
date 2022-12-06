@@ -19,8 +19,8 @@ builder.Services.AddMassTransit(config =>
     //Configure this Ordering service as a reciever: 1st step
     config.AddConsumer<BasketCheckoutConsumer>();
 
-    config.UsingRabbitMq((ctx, cfg) =>
-    {
+    config.UsingRabbitMq((ctx, cfg) => {
+
         cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
 
         //2nd step is configuring service as receiver. This helps subscribe to BasketCheckoutEvent
@@ -30,6 +30,7 @@ builder.Services.AddMassTransit(config =>
         });
     });
 });
+builder.Services.AddMassTransitHostedService();
 
 //General Configuration
 builder.Services.AddAutoMapper(typeof(Program));
