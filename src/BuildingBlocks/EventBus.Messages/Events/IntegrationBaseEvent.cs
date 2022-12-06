@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/**Cross-cutting-concerns refers to classes/code that is share between multiple services - Basket & Order microservices are are 
+﻿/**Cross-cutting-concerns refers to classes/code that is share between multiple services - Basket & Order microservices are are 
  * using RabbitMQ to dispatch & consumes order requests respectively, so we use cross-cutting-concerns here. We create the new
  * Solution Folder under Solutions (same level as Services), then we add a new folder (BuildingBlocks) then add a new project 
  * (class library) in /src/BuildingBlocks
