@@ -31,6 +31,10 @@ builder.Services.AddMassTransit(config =>
     });
 });
 
+//General Configuration
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<BasketCheckoutConsumer>();   //Ensures this class is created in the ASP.Net project
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
