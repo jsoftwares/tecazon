@@ -37,7 +37,7 @@ builder.Services.AddMassTransit(config =>
 {
     config.UsingRabbitMq((ctx, cfg) =>
     {
-        cfg.Host(builder.Configuration["EventBusSetting:HostAddress"]);
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
     });
 });
 //builder.Services.AddMassTransitHostedService(); this is registerred by default in MassTransit v8 and does not need to be done explicitely anymore

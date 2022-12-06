@@ -21,7 +21,7 @@ builder.Services.AddMassTransit(config =>
 
     config.UsingRabbitMq((ctx, cfg) =>
     {
-        cfg.Host(builder.Configuration["EventBusSetting:HostAddress"]);
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
 
         //2nd step is configuring service as receiver. This helps subscribe to BasketCheckoutEvent
         cfg.ReceiveEndpoint(EventBusConstants.BasketCheckoutQueue, c =>
