@@ -118,7 +118,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Order/{userName}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ] 
     }
   ],
   "GlobalConfiguration": {
