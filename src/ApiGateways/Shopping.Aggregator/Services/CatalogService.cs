@@ -1,4 +1,5 @@
-﻿using Shopping.Aggregator.Models;
+﻿using Shopping.Aggregator.Extensions;
+using Shopping.Aggregator.Models;
 
 namespace Shopping.Aggregator.Services
 {
@@ -6,26 +7,30 @@ namespace Shopping.Aggregator.Services
     {
         // this is the client we'll use to consume external services(API), it should be created from d IHttpClientFactory from ASP.NET Core
         // we provide this information in Program.cs when registering the application
-        private readonly HttpClient client;
+        private readonly HttpClient _client;
 
         public CatalogService(HttpClient client)
         {
-            this.client = client;
+            this._client = client;
         }
 
-        public Task<IEnumerable<CatalogModel>> GetCatalog()
+        public async Task<IEnumerable<CatalogModel>> GetCatalog()
         {
-            throw new NotImplementedException();
+            //ReadContentAs() as we defined in HttpClinetExtension helps to convent d JSON response from our API into object type ie List CatalogModelof 
+            var response = await _client.GetAsync("/api/v1/Catalog");
+            return await response.ReadContentAs<List<CatalogModel>>();
         }
 
-        public Task<CatalogModel> GetCatalog(string id)
+        public async Task<CatalogModel> GetCatalog(string id)
         {
-            throw new NotImplementedException();
+            var response = await _client.GetAsync($"/api/v1/Catalog/{id}");
+            return await response.ReadContentAs<CatalogModel>();
         }
 
-        public Task<IEnumerable<CatalogModel>> GetCatalogByCategory(string category)
+        public async Task<IEnumerable<CatalogModel>> GetCatalogByCategory(string category)
         {
-            throw new NotImplementedException();
+            var response = await _client.GetAsync($"/api/v1/Catalog/GetProductByCategory/{category}");
+            return await response.ReadContentAs<List<CatalogModel>>();
         }
     }
 }
