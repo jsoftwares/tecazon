@@ -1,3 +1,4 @@
+using Common.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -16,7 +17,10 @@ namespace AspnetRunBasics
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseSerilog((context, configuration) =>
+                .UseSerilog(SeriLogger.Configure
+
+                /** We comment this out because we are not setup & configure Serilog from our Common.Logging class Library
+                (context, configuration) =>
                 {
                     configuration
                         .Enrich.FromLogContext()   //means when we start logging we can enrich the data logged with info like machine name etc
@@ -34,7 +38,10 @@ namespace AspnetRunBasics
                             })
                         .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName) //ensure info on the app/microservice env from which the log is coming is also logged out
                         .ReadFrom.Configuration(context.Configuration); //means we getting the configuration from the Serilog block of appsettings.json file
-                })
+                }
+                
+                **/
+                )
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
