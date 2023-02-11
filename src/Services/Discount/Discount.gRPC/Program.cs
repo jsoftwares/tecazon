@@ -1,8 +1,13 @@
+using Common.Logging;
 using Discount.gRPC.Extensions;
 using Discount.gRPC.Repositories;
 using Discount.gRPC.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Configure SeriLog for logging to Elasticsearch
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Additional configuration is required to successfully run gRPC on macOS.
 // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682

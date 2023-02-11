@@ -1,7 +1,12 @@
 using Catalog.API.Data;
 using Catalog.API.Repositories;
+using Common.Logging;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Configure SeriLog for logging to Elasticsearch
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 // Add services to the container.
 
