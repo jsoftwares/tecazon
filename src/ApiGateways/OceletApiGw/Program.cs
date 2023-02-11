@@ -1,8 +1,13 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Cache.CacheManager;
+using Serilog;
+using Common.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Configure SeriLog with Elasticsearch & Kibana
+builder.Host.UseSerilog(SeriLogger.Configure);
 
 builder.Host
     .ConfigureAppConfiguration((hostingContext, config) =>
