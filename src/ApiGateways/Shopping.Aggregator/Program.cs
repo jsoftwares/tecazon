@@ -11,7 +11,10 @@ builder.Host.UseSerilog(SeriLogger.Configure);
 builder.Services.AddTransient<LoggingDelegatingHandler>();
 /**We modify our HttpClient factory implementation in other to introduce Resillience & Fault Handling with Http client. For this purpose we use Polly with IHttpClientFactory.
  * Polly has an extension (Microsoft.Extensions.Http.Polly for working with HTTP client & we will use that since we are using IHttpClientFactory. In Basket, we retry 
- * after 2 seconds for 3 times **/
+ * after 2 seconds for 3 times.
+ * We also implement the Circuit Breaker pattern, and 1st parameter states how many times we are allowed to retry reaching the target machine, 2nd states how much 
+ * time to wait before the next call; this willhelp protect our target machine CPU & RAM usage**/
+
 // Add services to the container.
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(c =>
     c.BaseAddress = new Uri(builder.Configuration["ApiSettings:CatalogUrl"]))
@@ -20,7 +23,8 @@ builder.Services.AddHttpClient<ICatalogService, CatalogService>(c =>
 builder.Services.AddHttpClient<IBasketService, BasketService>(c =>
     c.BaseAddress = new Uri(builder.Configuration["ApiSettings:BasketUrl"]))
     .AddHttpMessageHandler<LoggingDelegatingHandler>()
-    .AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromSeconds(2)));
+    .AddTransientHttpErrorPolicy(policy => policy.WaitAndRetryAsync(3, _ => TimeSpan.FromSeconds(2)))
+    .AddTransientHttpErrorPolicy(policy => policy.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
 builder.Services.AddHttpClient<IOrderService, OrderService>(c =>
     c.BaseAddress = new Uri(builder.Configuration["ApiSettings:OrderingUrl"]))
